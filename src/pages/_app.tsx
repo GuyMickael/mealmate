@@ -7,17 +7,19 @@ import { Theme } from "react-daisyui";
 import Head from "next/head";
 import AppNavbar from "~/components/common/Navbar";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Main = ({
   Component,
   pageProps,
 }: Pick<AppProps, "Component" | "pageProps">) => {
   const session = useSession();
+  const router = useRouter();
   return (
     <>
       <main className="flex h-screen justify-center">
         <div className="h-full w-full overflow-y-scroll md:max-w-2xl">
-          {session.status !== "authenticated" ? (
+          {session.status !== "authenticated" && router.pathname !== "/auth" ? (
             <>
               <Link href="/auth" className="btn-primary btn">
                 Connect
